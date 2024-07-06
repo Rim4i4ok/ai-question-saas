@@ -14,14 +14,17 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Empty from "@/components/empty";
 import Loader from "@/components/loader";
+import { cn } from "@/lib/utils";
 
 import { TFormSchema, formSchema } from "./validation";
 
+type Message =
+  | OpenAI.Chat.ChatCompletionUserMessageParam
+  | OpenAI.Chat.ChatCompletionAssistantMessageParam;
+
 function ConversationPage() {
   const router = useRouter();
-  const [messages, setMessages] = useState<OpenAI.Chat.ChatCompletionMessage[]>(
-    [],
-  );
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const form = useForm<TFormSchema>({
     resolver: zodResolver(formSchema),
@@ -34,8 +37,8 @@ function ConversationPage() {
 
   const onSubmitHandler = async (values: TFormSchema) => {
     try {
-      const userMessage: OpenAI.Chat.ChatCompletionMessage = {
-        role: "assistant",
+      const userMessage: OpenAI.Chat.ChatCompletionMessageParam = {
+        role: "user",
         content: values.prompt,
       };
 
@@ -105,7 +108,17 @@ function ConversationPage() {
           )}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
-              <div key={message.content}>{message.content}</div>
+              <div
+                key={message.content?.toString()}
+                className={cn(
+                  "flex w-full items-start gap-x-8 rounded-lg bg-slate-200 p-8",
+                  message.role === "user"
+                    ? "border border-black/10 bg-white"
+                    : "bg-muted",
+                )}
+              >
+                {message.content?.toString()}
+              </div>
             ))}
           </div>
         </div>
