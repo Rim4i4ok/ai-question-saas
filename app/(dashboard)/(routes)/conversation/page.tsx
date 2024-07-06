@@ -35,7 +35,7 @@ function ConversationPage() {
     },
   });
 
-  const isLoading = form.formState.isLoading;
+  const isLoading = form.formState.isSubmitting;
 
   const onSubmitHandler = async (values: TFormSchema) => {
     try {
@@ -51,8 +51,10 @@ function ConversationPage() {
       });
 
       setMessages((current) => [...current, userMessage, response.data]);
+
+      form.reset();
     } catch (error) {
-      // TODO: OPen Pro Modal
+      // TODO: Open Pro Modal
       console.log(error);
     } finally {
       router.refresh();
