@@ -13,6 +13,7 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Empty from "@/components/empty";
+import Loader from "@/components/loader";
 
 import { TFormSchema, formSchema } from "./validation";
 
@@ -94,6 +95,11 @@ function ConversationPage() {
           </Form>
         </div>
         <div className="mt-4 space-y-4">
+          {isLoading && (
+            <div className="flex w-full items-center justify-center rounded-lg bg-muted p-8">
+              <Loader />
+            </div>
+          )}
           {messages.length === 0 && !isLoading && (
             <Empty label="No conversation started" />
           )}
