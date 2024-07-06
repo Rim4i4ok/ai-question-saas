@@ -14,6 +14,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Empty from "@/components/empty";
 import Loader from "@/components/loader";
+import UserAvatar from "@/components/user-avatar";
+import BotAvatar from "@/components/bot-avatar";
 import { cn } from "@/lib/utils";
 
 import { TFormSchema, formSchema } from "./validation";
@@ -117,7 +119,8 @@ function ConversationPage() {
                     : "bg-muted",
                 )}
               >
-                {message.content?.toString()}
+                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
+                <p className="text-sm">{message.content?.toString()}</p>
               </div>
             ))}
           </div>
