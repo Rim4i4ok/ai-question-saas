@@ -1,22 +1,22 @@
 "use client";
 
-import { useState } from "react";
-import { Code, MessageSquare } from "lucide-react";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { Code } from "lucide-react";
 import { useRouter } from "next/navigation";
 import OpenAI from "openai";
-import axios from "axios";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
 
+import BotAvatar from "@/components/bot-avatar";
+import Empty from "@/components/empty";
 import Heading from "@/components/heading";
+import Loader from "@/components/loader";
+import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import Empty from "@/components/empty";
-import Loader from "@/components/loader";
 import UserAvatar from "@/components/user-avatar";
-import BotAvatar from "@/components/bot-avatar";
 import { cn } from "@/lib/utils";
 
 import { TFormSchema, formSchema } from "./validation";
