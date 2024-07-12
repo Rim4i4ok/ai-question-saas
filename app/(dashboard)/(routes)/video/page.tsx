@@ -93,7 +93,10 @@ function VideoPage() {
           )}
           {!video && !isLoading && <Empty label="No video generated" />}
           {video && (
-            <video className="mt-8 aspect-video w-full rounded-lg border bg-black">
+            <video
+              className="mt-8 aspect-square w-full rounded-lg border bg-black"
+              controls
+            >
               <source src={video} />
             </video>
           )}
