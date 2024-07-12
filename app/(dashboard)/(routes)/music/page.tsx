@@ -92,7 +92,11 @@ function MusicPage() {
             </div>
           )}
           {!music && !isLoading && <Empty label="No music generated" />}
-          <div>Music will be generated here</div>
+          {music && (
+            <audio className="mt-8 w-full" controls>
+              <source src={music} />
+            </audio>
+          )}
         </div>
       </div>
     </div>
