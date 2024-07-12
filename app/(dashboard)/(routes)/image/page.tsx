@@ -2,7 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { ImageIcon } from "lucide-react";
+import { Download, ImageIcon } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -11,6 +12,7 @@ import Empty from "@/components/empty";
 import Heading from "@/components/heading";
 import Loader from "@/components/loader";
 import { Button } from "@/components/ui/button";
+import { Card, CardFooter } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
@@ -159,7 +161,25 @@ function ImagePage() {
           {images.length === 0 && !isLoading && (
             <Empty label="No images generated" />
           )}
-          <div>Images will be rendered here</div>
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {images.map((src) => (
+              <Card key={src} className="overflow-hidden rounded-lg">
+                <div className="relative aspect-square">
+                  <Image alt="Image" src={src} fill />
+                </div>
+                <CardFooter className="p-2">
+                  <Button
+                    variant="secondary"
+                    className="w-full"
+                    onClick={() => window.open(src)}
+                  >
+                    <Download className="mr-2 h-4 w-4" />
+                    Download
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </div>
