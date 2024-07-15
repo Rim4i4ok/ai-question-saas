@@ -35,7 +35,7 @@ function FreeCount({ apiLimitCount = 0 }: FreeCountProps) {
               value={(apiLimitCount / MAX_FREE_COUNTS) * 100}
             />
           </div>
-          <Button className="w-full">
+          <Button className="w-full" variant="premium">
             Upgrade <Zap className="2-4 ml-2 h-4 fill-white" />
           </Button>
         </CardContent>
