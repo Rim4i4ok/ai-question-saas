@@ -22,11 +22,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 import { amountOptions, resolutionOptions } from "./constants";
 import { TFormSchema, formSchema } from "./validation";
 
 function ImagePage() {
+  const proModal = useProModal();
   const router = useRouter();
   const [images, setImages] = useState<string[]>([]);
 
@@ -50,9 +52,12 @@ function ImagePage() {
 
       setImages(urls);
       form.reset();
-    } catch (error) {
-      // TODO: Open Pro Modal
-      console.log(error);
+    } catch (error: any) {
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      } else {
+        console.log(error);
+      }
     } finally {
       router.refresh();
     }

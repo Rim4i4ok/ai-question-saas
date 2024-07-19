@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import UserAvatar from "@/components/user-avatar";
+import { useProModal } from "@/hooks/use-pro-modal";
 import { cn } from "@/lib/utils";
 
 import { TFormSchema, formSchema } from "./validation";
@@ -26,6 +27,7 @@ type Message =
   | OpenAI.Chat.ChatCompletionAssistantMessageParam;
 
 function CodePage() {
+  const proModal = useProModal();
   const router = useRouter();
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -54,9 +56,12 @@ function CodePage() {
       setMessages((current) => [...current, userMessage, response.data]);
 
       form.reset();
-    } catch (error) {
-      // TODO: Open Pro Modal
-      console.log(error);
+    } catch (error: any) {
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      } else {
+        console.log(error);
+      }
     } finally {
       router.refresh();
     }
