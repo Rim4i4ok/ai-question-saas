@@ -1,19 +1,12 @@
 "use client";
 
-import {
-  CodeIcon,
-  ImageIcon,
-  LayoutDashboard,
-  MessageSquare,
-  MusicIcon,
-  SettingsIcon,
-  VideoIcon,
-} from "lucide-react";
+import { SettingsIcon } from "lucide-react";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { tools } from "@/constants";
 import { cn } from "@/lib/utils";
 
 import FreeCount from "./free-counter";
@@ -21,42 +14,7 @@ import FreeCount from "./free-counter";
 const montserrat = Montserrat({ weight: "600", subsets: ["cyrillic"] });
 
 const routes = [
-  {
-    label: "Dashboard",
-    icon: LayoutDashboard,
-    href: "/dashboard",
-    color: "text-sky-500",
-  },
-  {
-    label: "Conversation",
-    icon: MessageSquare,
-    href: "/conversation",
-    color: "text-violet-500",
-  },
-  {
-    label: "Image Generation",
-    icon: ImageIcon,
-    href: "/image",
-    color: "text-pink-700",
-  },
-  {
-    label: "Video Generation",
-    icon: VideoIcon,
-    href: "/video",
-    color: "text-yellow-700",
-  },
-  {
-    label: "Music Generation",
-    icon: MusicIcon,
-    href: "/music",
-    color: "text-green-700",
-  },
-  {
-    label: "Code Generation",
-    icon: CodeIcon,
-    href: "/code",
-    color: "text-emerald-700",
-  },
+  ...tools,
   {
     label: "Settings",
     icon: SettingsIcon,

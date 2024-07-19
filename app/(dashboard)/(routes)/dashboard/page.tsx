@@ -1,56 +1,11 @@
 "use client";
 
-import {
-  ArrowRight,
-  CodeIcon,
-  ImageIcon,
-  MessageSquare,
-  MusicIcon,
-  VideoIcon,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { Card } from "@/components/ui/card";
+import { tools } from "@/constants";
 import { cn } from "@/lib/utils";
-
-const tools = [
-  {
-    label: "Conversation",
-    icon: MessageSquare,
-    color: "text-violet-500",
-    bgColor: "bg-violet-500/10",
-    href: "/conversation",
-  },
-
-  {
-    label: "Image Generation",
-    icon: ImageIcon,
-    color: "text-pink-500",
-    bgColor: "bg-pink-500/10",
-    href: "/image",
-  },
-  {
-    label: "Video Generation",
-    icon: VideoIcon,
-    color: "text-yellow-500",
-    bgColor: "bg-yellow-500/10",
-    href: "/video",
-  },
-  {
-    label: "Music Generation",
-    icon: MusicIcon,
-    color: "text-green-500",
-    bgColor: "bg-green-500/10",
-    href: "/music",
-  },
-  {
-    label: "Code Generation",
-    icon: CodeIcon,
-    color: "text-emerald-500",
-    bgColor: "bg-emerald-500/10",
-    href: "/code",
-  },
-];
 
 export default function DashboardPage() {
   const router = useRouter();
