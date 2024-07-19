@@ -4,6 +4,7 @@ import { Zap } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 import { MAX_FREE_COUNTS } from "@/constants";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
@@ -14,6 +15,7 @@ type FreeCountProps = {
 };
 
 function FreeCount({ apiLimitCount = 0 }: FreeCountProps) {
+  const proModal = useProModal();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -35,7 +37,11 @@ function FreeCount({ apiLimitCount = 0 }: FreeCountProps) {
               value={(apiLimitCount / MAX_FREE_COUNTS) * 100}
             />
           </div>
-          <Button className="w-full" variant="premium">
+          <Button
+            className="w-full"
+            variant="premium"
+            onClick={proModal.onOpen}
+          >
             Upgrade <Zap className="2-4 ml-2 h-4 fill-white" />
           </Button>
         </CardContent>
