@@ -72,6 +72,7 @@ export const ProModal = () => {
             variant="premium"
             className="w-full"
             onClick={onSubscribeHandler}
+            disabled={isLoading}
           >
             Upgrade <Zap className="ml-2 h-4 w-4 fill-white" />
           </Button>
