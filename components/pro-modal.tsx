@@ -1,6 +1,8 @@
 "use client";
 
+import axios from "axios";
 import { Check, Zap } from "lucide-react";
+import { useState } from "react";
 
 import { tools } from "@/constants";
 import { useProModal } from "@/hooks/use-pro-modal";
@@ -20,6 +22,20 @@ import {
 
 export const ProModal = () => {
   const proModal = useProModal();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSubscribeHandler = async () => {
+    try {
+      setIsLoading(true);
+      const response = await axios.get("/api/stripe");
+
+      window.location.href = response.data.url;
+    } catch (error) {
+      console.log(error, "STRIPE_CLIENT_ERROR");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
@@ -51,7 +67,12 @@ export const ProModal = () => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button size="lg" variant="premium" className="w-full">
+          <Button
+            size="lg"
+            variant="premium"
+            className="w-full"
+            onClick={onSubscribeHandler}
+          >
             Upgrade <Zap className="ml-2 h-4 w-4 fill-white" />
           </Button>
         </DialogFooter>
