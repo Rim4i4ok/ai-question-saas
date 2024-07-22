@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import "./globals.css";
+import CrispProvider from "@/components/crisp-provider";
 import { ModalProvider } from "@/components/modal-provider";
 import ToasterProvider from "@/components/toaster-provider";
 
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <CrispProvider />
         <body className={inter.className}>
           <ModalProvider />
           <ToasterProvider />
