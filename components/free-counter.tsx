@@ -12,9 +12,10 @@ import { Progress } from "./ui/progress";
 
 type FreeCountProps = {
   apiLimitCount: number;
+  isPro: boolean;
 };
 
-function FreeCount({ apiLimitCount = 0 }: FreeCountProps) {
+function FreeCount({ apiLimitCount = 0, isPro = false }: FreeCountProps) {
   const proModal = useProModal();
   const [mounted, setMounted] = useState(false);
 
@@ -23,6 +24,7 @@ function FreeCount({ apiLimitCount = 0 }: FreeCountProps) {
   }, []);
 
   if (!mounted) return null;
+  if (isPro) return null;
 
   return (
     <div className="px-3">
